@@ -9,9 +9,11 @@
 
 namespace ApiRestProveedores.NET.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
     public partial class proveedor
     {
         public int id { get; set; }
@@ -23,9 +25,17 @@ namespace ApiRestProveedores.NET.Models
         public int id_municipio { get; set; }
         public int id_localidad { get; set; }
         public string nombre { get; set; }
-    
+
+        [JsonIgnore]
+        [IgnoreDataMember]
         public virtual estado estado { get; set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember]
         public virtual localidad localidad { get; set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember]
         public virtual municipio municipio { get; set; }
     }
 }
