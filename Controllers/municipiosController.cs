@@ -7,11 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using ApiRestProveedores.NET.Models;
 
 namespace ApiRestProveedores.NET.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class municipiosController : ApiController
     {
         private webservice_cpEntities db = new webservice_cpEntities();
@@ -20,6 +22,14 @@ namespace ApiRestProveedores.NET.Controllers
         public IQueryable<municipio> Getmunicipios()
         {
             return db.municipios;
+        }
+
+
+        [HttpGet]
+        [Route("api/municipios/estado/{cve_estado}")]
+        public IQueryable<municipio> getMunicipiosByEstado(int cve_estado)
+        {
+            return db.municipios.Where(m => m.cve_estado == cve_estado);
         }
 
         // GET: api/municipios/5
